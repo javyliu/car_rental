@@ -16,7 +16,7 @@ void main() {
         textTheme: GoogleFonts.mulishTextTheme(),
       ),
       debugShowCheckedModeBanner: false,
-      defaultTransition: Transition.cupertino,
+      defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
       getPages: AppPages.routes,
