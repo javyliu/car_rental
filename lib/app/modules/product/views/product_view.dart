@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:car_rental/app/models/car_model.dart';
 import 'package:car_rental/app/modules/home/controllers/home_controller.dart';
-import 'package:car_rental/app/routes/app_pages.dart';
 import 'package:car_rental/app/widgets/car_images_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -96,11 +95,72 @@ class ProductView extends GetView<ProductController> {
                         .toList(),
                   ),
                 ),
+                buildTopDealers(),
                 SizedBox(height: 20),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildTopDealers() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("TOP DEALERS", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.grey[400])),
+              GestureDetector(
+                child: Row(
+                  children: [
+                    Text("More", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Config.primaryColor)),
+                    SizedBox(width: 8),
+                    Icon(Icons.arrow_forward_ios, size: 12, color: Config.primaryColor)
+                  ],
+                ),
+                onTap: () => Get.find<HomeController>().changePage(2),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: 150,
+          margin: EdgeInsets.only(bottom: 16),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            children: controller.dealers.map((e) => buildDealer(e, controller.dealers.indexOf(e))).toList(),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildDealer(dealer, int idx) {
+    return Container(
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(15))),
+      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(right: 16, left: idx == 0 ? 16 : 0),
+      width: 150,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(dealer.image), fit: BoxFit.cover),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          ),
+          SizedBox(height: 16),
+          Text(dealer.name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, height: 1)),
+          Text(dealer.offers.toString() + " offers", style: TextStyle(fontSize: 14, color: Colors.grey)),
+        ],
       ),
     );
   }
