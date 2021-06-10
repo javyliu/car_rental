@@ -11,93 +11,99 @@ import '../../../config.dart';
 import '../controllers/product_controller.dart';
 
 class ProductView extends GetView<ProductController> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SafeArea(
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            color: Colors.grey[200],
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                buildHeader(),
+    print("---------product view build-------");
 
-                ///available cars
-                GestureDetector(
-                  onTap: () => Get.find<HomeController>().changePage(1),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
-                    child: Container(
-                      decoration: BoxDecoration(color: Config.primaryColor, borderRadius: BorderRadius.all(Radius.circular(15))),
-                      padding: const EdgeInsets.all(24),
-                      height: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Avaiable Cars", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
-                              Text("Long term and short term", style: TextStyle(fontSize: 16, color: Colors.white)),
-                            ],
-                          ),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Icon(Icons.arrow_forward_ios, color: Config.primaryColor),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              color: Colors.grey[200],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  buildHeader(),
 
-                ///Top dealers
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("TOP DEALS", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.grey[400])),
-                      GestureDetector(
-                        onTap: () => Get.find<HomeController>().changePage(2),
+                  ///available cars
+                  GestureDetector(
+                    onTap: () => Get.find<HomeController>().changePage(1),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+                      child: Container(
+                        decoration: BoxDecoration(color: Config.primaryColor, borderRadius: BorderRadius.all(Radius.circular(15))),
+                        padding: const EdgeInsets.all(24),
+                        height: 100,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("More", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Config.primaryColor)),
-                            SizedBox(width: 8),
-                            Icon(Icons.arrow_forward_ios, size: 12, color: Config.primaryColor)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Avaiable Cars", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+                                Text("Long term and short term", style: TextStyle(fontSize: 16, color: Colors.white)),
+                              ],
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(15)),
+                              ),
+                              child: Icon(Icons.arrow_forward_ios, color: Config.primaryColor),
+                            )
                           ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                Container(
-                  height: 280,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: controller.cars
-                        .map(
-                          (car) => GestureDetector(
-                            onTap: () => Get.find<HomeController>().changePage(3),
-                            child: buildCar(car, controller.cars.indexOf(car)),
+
+                  ///Top dealers
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("TOP DEALS", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.grey[400])),
+                        GestureDetector(
+                          onTap: () => Get.find<HomeController>().changePage(2),
+                          child: Row(
+                            children: [
+                              Text("More", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Config.primaryColor)),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward_ios, size: 12, color: Config.primaryColor)
+                            ],
                           ),
-                        )
-                        .toList(),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                buildTopDealers(),
-                SizedBox(height: 20),
-              ],
+                  Container(
+                    height: 280,
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: controller.cars
+                          .map(
+                            (car) => GestureDetector(
+                              onTap: () => Get.find<HomeController>().changePage(3),
+                              child: buildCar(car, controller.cars.indexOf(car)),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  buildTopDealers(),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),

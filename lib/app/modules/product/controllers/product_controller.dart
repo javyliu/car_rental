@@ -5,15 +5,15 @@ import 'package:car_rental/app/models/dealer_model.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
-  List<Car> cars = [];
+  RxList<Car> cars = <Car>[].obs;
   late Car displayCar;
-  late List<Dealer> dealers = [];
+  var dealers = <Dealer>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    cars = CarData().getCarList();
-    dealers = DealerData().getDealerList();
+    cars.value = CarData().getCarList();
+    dealers.value = DealerData().getDealerList();
     displayCar = cars[2];
   }
 
