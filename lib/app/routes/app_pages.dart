@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:car_rental/app/modules/detail/bindings/detail_binding.dart';
+import 'package:car_rental/app/modules/detail/views/detail_view.dart';
 import 'package:car_rental/app/modules/home/bindings/home_binding.dart';
 import 'package:car_rental/app/modules/home/views/home_view.dart';
 import 'package:car_rental/app/modules/messages/bindings/messages_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL,
+      page: () => DetailView(),
+      binding: DetailBinding(),
     ),
   ];
 }
