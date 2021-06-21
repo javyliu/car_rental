@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
-import 'package:car_rental/app/models/car_model.dart';
-import 'package:car_rental/app/modules/home/controllers/home_controller.dart';
+import 'package:car_rental/app/routes/app_pages.dart';
 import 'package:car_rental/app/widgets/car_images_widget.dart';
+import 'package:car_rental/app/widgets/car_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -22,6 +22,7 @@ class ProductView extends GetView<ProductController> {
         color: Colors.white,
         child: SafeArea(
           child: SingleChildScrollView(
+            key: PageStorageKey(1),
             physics: BouncingScrollPhysics(),
             child: Container(
               color: Colors.grey[200],
@@ -32,7 +33,7 @@ class ProductView extends GetView<ProductController> {
 
                   ///available cars
                   GestureDetector(
-                    onTap: () => Get.find<HomeController>().changePage(1),
+                    onTap: () => Get.toNamed(Routes.AVAILABLE_CARS),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
                       child: Container(
@@ -73,7 +74,7 @@ class ProductView extends GetView<ProductController> {
                       children: [
                         Text("TOP DEALS", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.grey[400])),
                         GestureDetector(
-                          onTap: () => Get.find<HomeController>().changePage(2),
+                          onTap: () => null,
                           child: Row(
                             children: [
                               Text("More", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Config.primaryColor)),
@@ -93,7 +94,7 @@ class ProductView extends GetView<ProductController> {
                       children: controller.cars
                           .map(
                             (car) => GestureDetector(
-                              onTap: () => Get.find<HomeController>().changePage(3),
+                              onTap: () => Get.toNamed(Routes.BOOK_CAR, arguments: car),
                               child: buildCar(car, controller.cars.indexOf(car)),
                             ),
                           )
@@ -128,7 +129,7 @@ class ProductView extends GetView<ProductController> {
                     Icon(Icons.arrow_forward_ios, size: 12, color: Config.primaryColor)
                   ],
                 ),
-                onTap: () => Get.find<HomeController>().changePage(2),
+                onTap: () => null,
               ),
             ],
           ),
@@ -166,61 +167,6 @@ class ProductView extends GetView<ProductController> {
           SizedBox(height: 16),
           Text(dealer.name, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, height: 1)),
           Text(dealer.offers.toString() + " offers", style: TextStyle(fontSize: 14, color: Colors.grey)),
-        ],
-      ),
-    );
-  }
-
-  Widget buildCar(Car car, [int? idx]) {
-    // print("-----${car.brand}");
-
-    return Container(
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(15))),
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.only(right: idx != null ? 16 : 0, left: idx == 0 ? 16 : 0),
-      width: 220,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Config.primaryColorShadow,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                child: Text(
-                  car.condition!,
-                  style: TextStyle(color: Config.primaryColor, fontSize: 12, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 115,
-            child: Center(
-              child: Hero(
-                tag: car.model!,
-                child: Image.asset(car.images!.first, fit: BoxFit.fitWidth),
-              ),
-            ),
-          ),
-          SizedBox(height: 24),
-          Text(car.model!, style: TextStyle(fontSize: 18)),
-          SizedBox(height: 8),
-          Text(car.brand!,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                height: 1,
-              )),
-          Text(
-            """per ${car.condition == 'Daily' ? 'day' : car.condition == 'Weekly' ? 'week' : 'month'}""",
-            style: TextStyle(fontSize: 14, color: Colors.grey),
-          )
         ],
       ),
     );

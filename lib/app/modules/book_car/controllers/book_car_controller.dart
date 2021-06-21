@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-class ProfileController extends GetxController {
+class BookCarController extends GetxController {
+  //TODO: Implement BookCarController
+
   final count = 0.obs;
   @override
   void onInit() {

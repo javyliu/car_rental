@@ -1,3 +1,4 @@
+import 'package:car_rental/app/modules/home/bindings/home_binding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ void main() {
       opaqueRoute: Get.isOpaqueRouteDefault,
       popGesture: Get.isPopGestureEnable,
       getPages: AppPages.routes,
+      initialBinding: HomeBinding(),
     ),
   );
 }

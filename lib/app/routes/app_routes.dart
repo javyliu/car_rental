@@ -9,6 +9,8 @@ abstract class Routes {
   static const SEARCH = _Paths.SEARCH;
   static const MESSAGES = _Paths.MESSAGES;
   static const PROFILE = _Paths.PROFILE;
+  static const AVAILABLE_CARS = _Paths.AVAILABLE_CARS;
+  static const BOOK_CAR = _Paths.BOOK_CAR;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const SEARCH = '/search';
   static const MESSAGES = '/messages';
   static const PROFILE = '/profile';
+  static const AVAILABLE_CARS = '/available-cars';
+  static const BOOK_CAR = '/book-car';
 }

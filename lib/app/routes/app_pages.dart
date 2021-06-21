@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import 'package:car_rental/app/modules/available_cars/bindings/available_cars_binding.dart';
+import 'package:car_rental/app/modules/available_cars/views/available_cars_view.dart';
+import 'package:car_rental/app/modules/book_car/bindings/book_car_binding.dart';
+import 'package:car_rental/app/modules/book_car/views/book_car_view.dart';
 import 'package:car_rental/app/modules/home/bindings/home_binding.dart';
 import 'package:car_rental/app/modules/home/views/home_view.dart';
 import 'package:car_rental/app/modules/messages/bindings/messages_binding.dart';
@@ -43,6 +47,16 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.AVAILABLE_CARS,
+      page: () => AvailableCarsView(),
+      binding: AvailableCarsBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_CAR,
+      page: () => BookCarView(),
+      binding: BookCarBinding(),
     ),
   ];
 }

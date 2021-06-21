@@ -1,4 +1,7 @@
-import 'package:car_rental/app/routes/app_pages.dart';
+import 'package:car_rental/app/modules/messages/views/messages_view.dart';
+import 'package:car_rental/app/modules/product/views/product_view.dart';
+import 'package:car_rental/app/modules/profile/views/profile_view.dart';
+import 'package:car_rental/app/modules/search/views/search_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,13 +12,19 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Navigator(
-        key: Get.nestedKey(1),
-        initialRoute: Routes.PRODUCT,
-        onGenerateRoute: controller.onGenerateRoute,
+      body: PageView(
+        controller: controller.pageController,
+        physics: NeverScrollableScrollPhysics(),
+        children: [
+          ProductView(),
+          SearchView(),
+          MessagesView(),
+          ProfileView(),
+        ],
       ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
+      bottomNavigationBar: ValueBuilder<int?>(
+        initialValue: 0,
+        builder: (snapshot, updater) => BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
@@ -34,8 +43,11 @@ class HomeView extends GetView<HomeController> {
               label: '设置',
             ),
           ],
-          currentIndex: controller.currentIndex.value,
-          onTap: controller.changePage,
+          currentIndex: snapshot!,
+          onTap: (value) {
+            controller.pageController.animateToPage(value, duration: controller.animationduration, curve: Curves.ease);
+            updater(value);
+          },
           unselectedFontSize: 12,
           selectedFontSize: 12,
           showUnselectedLabels: true,

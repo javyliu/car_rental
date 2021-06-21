@@ -11,6 +11,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final PageController pageController = PageController();
+  final animationduration = Duration(milliseconds: 300);
+
   @override
   void onInit() {
     super.onInit();
@@ -70,5 +73,7 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    pageController.dispose();
+  }
 }
