@@ -2,6 +2,7 @@ import 'package:car_rental/app/models/car_model.dart';
 import 'package:flutter/material.dart';
 
 import '../config.dart';
+import 'car_name_widget.dart';
 
 Widget buildCar(Car car, [int? idx]) {
   // print("-----${car.brand}");
@@ -41,14 +42,7 @@ Widget buildCar(Car car, [int? idx]) {
           ),
         ),
         SizedBox(height: 24),
-        Text(car.model!, style: TextStyle(fontSize: 18)),
-        SizedBox(height: 8),
-        Text(car.brand!,
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              height: 1,
-            )),
+        CarNameWidget(car: car),
         Text(
           """per ${car.condition == 'Daily' ? 'day' : car.condition == 'Weekly' ? 'week' : 'month'}""",
           style: TextStyle(fontSize: 14, color: Colors.grey),

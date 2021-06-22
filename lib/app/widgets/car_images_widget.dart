@@ -16,24 +16,7 @@ class CarImagesWidget extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 150,
-              child: PageView(
-                physics: BouncingScrollPhysics(),
-                onPageChanged: (value) {
-                  print("----on page changed $value, $updateFn");
-                  updateFn(value);
-                },
-                children: images
-                    .map<Widget>(
-                      (img) => Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Image.asset(img, fit: BoxFit.scaleDown),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
+            isExpanded ? Expanded(child: _buildImgPageView(updateFn)) : _buildImgPageView(updateFn),
             Container(
               height: 30,
               child: Row(
@@ -57,8 +40,27 @@ class CarImagesWidget extends StatelessWidget {
           ],
         );
       },
-      onUpdate: (value) => print('Value updated: $value'),
-      onDispose: () => print('Widget unmounted'),
+    );
+  }
+
+  Container _buildImgPageView(ValueBuilderUpdateCallback<int> updateFn) {
+    return Container(
+      height: 150,
+      child: PageView(
+        physics: BouncingScrollPhysics(),
+        onPageChanged: (value) {
+          print("----on page changed $value, $updateFn");
+          updateFn(value);
+        },
+        children: images
+            .map<Widget>(
+              (img) => Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Image.asset(img, fit: BoxFit.scaleDown),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }
