@@ -6,6 +6,8 @@ import 'package:car_rental/app/modules/book_car/bindings/book_car_binding.dart';
 import 'package:car_rental/app/modules/book_car/views/book_car_view.dart';
 import 'package:car_rental/app/modules/home/bindings/home_binding.dart';
 import 'package:car_rental/app/modules/home/views/home_view.dart';
+import 'package:car_rental/app/modules/image_bg/bindings/image_bg_binding.dart';
+import 'package:car_rental/app/modules/image_bg/views/image_bg_view.dart';
 import 'package:car_rental/app/modules/messages/bindings/messages_binding.dart';
 import 'package:car_rental/app/modules/messages/views/messages_view.dart';
 import 'package:car_rental/app/modules/product/bindings/product_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.BOOK_CAR,
       page: () => BookCarView(),
       binding: BookCarBinding(),
+    ),
+    GetPage(
+      name: _Paths.IMAGE_BG,
+      page: () => ImageBgView(),
+      binding: ImageBgBinding(),
     ),
   ];
 }

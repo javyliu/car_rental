@@ -20,6 +20,7 @@ class BookCarView extends GetView<BookCarController> {
           width: double.infinity,
           color: Colors.grey[200],
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Container(

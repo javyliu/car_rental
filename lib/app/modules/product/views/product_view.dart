@@ -201,12 +201,15 @@ class ProductView extends GetView<ProductController> {
                     Text(controller.displayCar.brand!, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.grey)),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text("My Garage", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Config.primaryColor)),
-                    SizedBox(width: 8),
-                    Icon(Icons.arrow_forward, size: 23, color: Config.primaryColor)
-                  ],
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.IMAGE_BG),
+                  child: Row(
+                    children: [
+                      Text("My Garage", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Config.primaryColor)),
+                      SizedBox(width: 8),
+                      Icon(Icons.arrow_forward, size: 23, color: Config.primaryColor)
+                    ],
+                  ),
                 ),
               ],
             ),
